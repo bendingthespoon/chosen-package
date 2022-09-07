@@ -904,7 +904,7 @@
       this.clear_backstroke();
       this.show_search_field_default();
       this.search_field_scale();
-      return this.search_field.blur();
+      return this.search_field.trigger('blur');
     };
 
     Chosen.prototype.activate_field = function() {
@@ -914,7 +914,7 @@
       this.container.addClass("chosen-container-active");
       this.active_field = true;
       this.search_field.val(this.search_field.val());
-      return this.search_field.focus();
+      return this.search_field.trigger('focus');
     };
 
     Chosen.prototype.test_active_click = function(evt) {
@@ -987,7 +987,7 @@
       }
       this.container.addClass("chosen-with-drop");
       this.results_showing = true;
-      this.search_field.focus();
+      this.search_field.trigger('focus');
       this.search_field.val(this.get_search_field_value());
       this.winnow_results();
       return this.form_field_jq.trigger("chosen:showing_dropdown", {
@@ -1045,7 +1045,7 @@
       if (target.length) {
         this.result_highlight = target;
         this.result_select(evt);
-        return this.search_field.focus();
+        return this.search_field.trigger('focus');
       }
     };
 
@@ -1096,7 +1096,7 @@
     Chosen.prototype.choice_destroy = function(link) {
       if (this.result_deselect(link[0].getAttribute("data-option-array-index"))) {
         if (this.active_field) {
-          this.search_field.focus();
+          this.search_field.trigger('focus');
         } else {
           this.show_search_field_default();
         }
@@ -1224,7 +1224,7 @@
     };
 
     Chosen.prototype.get_search_text = function() {
-      return $.trim(this.get_search_field_value());
+      return this.get_search_field_value().trim();
     };
 
     Chosen.prototype.escape_html = function(text) {
